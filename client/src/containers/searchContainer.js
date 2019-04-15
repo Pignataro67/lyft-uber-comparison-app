@@ -14,4 +14,4 @@ class SearchContainer extends Component {
   }
 }
 
-export default SearchContainer
+export default SearchContainer;

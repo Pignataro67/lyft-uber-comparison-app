@@ -8,7 +8,8 @@ class ResultsContainer extends Component {
 
     return (
       <div>
-        <CardLabel cardLabel={cardLabel}/>
+        <CardLabel cardLabel={cardLabel} />
+        <Results />
       </div>
     )
   }
