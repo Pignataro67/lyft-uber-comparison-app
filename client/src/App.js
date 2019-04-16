@@ -1,23 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import { connect } from 'react-redux';
-import Card from './components/Card';
+// import Card from './components/Card';
 // import Header from './components/Header';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import ConfirmRouteContainer from './containers/ConfirmRouteContainer';
+import ResultsContainer from './containers/ResultsContainer';
+import SearchContainer from './containers/SearchContainer';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-      {/* <Header />   */}
-      <Card startingLocation={this.props.startingLocation} destination={this.props.destination}/>
+        <Router>
+          <div>  
+          <Route exact path="/" component={SearchContainer}/>
+          <Route exact path="/confirm_route" component={ConfirmRouteContainer}/>
+          <Route exact path="/results" component={ResultsContainer}/>
+          </div>
+        </Router>
       </div>
     );
   }
 }
 
-mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {startingLocation: state.startingLocation, destination: state.destination}
 }
 
-export default connect()(App);
+export default connect(mapStateToProps)(App);
