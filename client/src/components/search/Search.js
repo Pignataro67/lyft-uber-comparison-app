@@ -20,14 +20,25 @@ class Search extends Component {
       startingLocation
     })
   }
-  
+
+  handleChangeDestination = ({value: destination}) => {
+    this.setState({
+      destination
+    })
+  }
+
   render() {
     return (
-      <form>
-        <SearchInput />
-        <SearchInput />
-        <SearchInput />
-      </form>
+      <Card >
+        <form onSubmit={this.handleOnSubmit}>
+          <SearchInput label="Starting Location" onChange={this.handleChangeStart}/>
+          <br/>
+          <SearchInput label="Destination" onChange={this.handleChangeDestination}/>
+          <br/>
+          <Button buttonTitle="Submit"/>
+          <SearchInput />
+        </form>
+      </Card >
     )
   }
 }
