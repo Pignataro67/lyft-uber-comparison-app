@@ -1,9 +1,9 @@
 import React from 'react';
 
 const CardLabel = (props) => {
-  <h1>
+  <h2>
     {props.cardLabel}
-  </h1>
+  </h2>
 }
 
 export default Cardlabel;
