@@ -20,6 +20,8 @@ gem 'puma', '~> 3.11'
 # gem 'mini_magick', '~> 4.8'
 
 gem 'foreman', '~> 0.82.0'
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'rest-client'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
