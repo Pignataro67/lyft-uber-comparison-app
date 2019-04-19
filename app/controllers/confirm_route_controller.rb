@@ -2,10 +2,10 @@ class ConfirmRouteController < ApplicationController
   require uri
   
   def get_coordinates
-    location = URI.encode(params[:location])
+    location = params[:location]
     res = RestClient::Request.execute(
       method: :get,
-      url: "https://api.mapbox.com/geocoding/v5/mapbox.places/#{location}.json?access_token=#{ENV['MAPBOX']}",
+      url: "https://maps.googleapis.com/maps/api/geocode/json?address=#{location}&key=#{ENV['GOOGLE_PLACES_KEY']}",
       )
     render json: res
   end
