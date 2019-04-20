@@ -10,35 +10,51 @@ class Search extends Component {
     destination: ''
   }
 
-  handleFormSubmit = () => {
-    // e.preventDefault()
+  handleFormSubmit = (e) => {
+    e.preventDefault()
     console.log(this.state)
   }
 
-  handleChangeStart = ({value: startingLocation}) => {
+  handleChangeStart = (e) => {
     this.setState({
-      startingLocation
+      startingLocation: e.target.value,
     })
   }
 
-  handleChangeDestination = ({value: destination}) => {
+  handleChangeDestination = (e, {value: destination}) => {
     this.setState({
       destination
     })
   }
 
-  handleStartSearch = () => {
-    console.log(this.state.startngLocation)
+  handleStartSearch = (e) => {
+    e.preventDefault()
+    e.stopPropogation()
+
+    this.props.actionsfetchStartingLocation(this.state.startingLocation)
   }
 
-  handleDropOffSearch = () => {
+  handleDropOffSearch = (e) => {
+    e.preventDefault()
+    e.stopPropogation()
     console.log(this.state.dropOff)
+  }
+
+  handleUpdateAddress = (e) => {
+    this.setState({
+      startingLocation: e.currentTarget.innerText,
+    })
   }
 
   render() {
     return (
       <Card >
-          <SearchInput label="Starting Location" onChange={this.handleChangeStart} onClick={this.handleStartSearch}/>
+          <SearchInput label="Starting Location" 
+          
+          suggestedLocations = {this.props.suggestedStartingLocations} 
+          onChange={this.handleChangeStart} 
+          onSubmit={this.handleStartSearch}
+          handleUpdateAddress={this.handleUpdateAddress}/>
           <br/>
           <SearchInput label="Destination" onChange={this.handleChangeDestination} onClick={this.dropOffSearch}/>
           <br/>
