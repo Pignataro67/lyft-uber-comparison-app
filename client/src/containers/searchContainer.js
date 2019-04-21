@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Search from '../components/search/Search';
 import Cardlabel from '../components/CardLabel';
-import * as searchActions from '../actions/fetchLocations'
+import Card from '../components/Card';
+import * as searchActions from '../actions/fetchLocations';
 import { bindActionCreators } from 'redux';
 import { connect } from 'reaxct-redux';
 
@@ -9,17 +10,17 @@ class SearchContainer extends Component {
   render() {
       let cardLabel = "Enter your trip locations below:"
     return (
-      <div>
+      <Card>
         <CardLabel cardLabel={cardLabel}/>
+        <Search {...this.props}/>
         <Search />
-      </div>
+      </Card>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  startingLocation: state.startingLocation,
-  dropOff: state.dropOff
+  ...state
 })
 
 const mapDispatchToProps = (dispatch) => {
