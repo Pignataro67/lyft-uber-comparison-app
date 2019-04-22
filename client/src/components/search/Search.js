@@ -21,9 +21,9 @@ class Search extends Component {
     })
   }
 
-  handleChangeDestination = (e, {value: destination}) => {
+  handleChangeDestination = (e) => {
     this.setState({
-      destination
+      destination: e.target.value
     })
   }
 
@@ -35,28 +35,40 @@ class Search extends Component {
   }
 
   handleDropOffSearch = (e) => {
+    console.log(this.state.dropOff)
     e.preventDefault()
     e.stopPropogation()
-    console.log(this.state.dropOff)
+    this.props.actions.fetchDropOff(this.state.dropOff)
   }
 
-  handleUpdateAddress = (e) => {
+  handleUpdateStartAddress = (e) => {
     this.setState({
       startingLocation: e.currentTarget.innerText,
+    })
+  }
+
+  handleUpdateDropOffAddress = (e) => {
+    this.setState({
+      dropOff: e.currentTarget.innerText,
     })
   }
 
   render() {
     return (
       <Card >
-          <SearchInput label="Starting Location" 
+          <SearchInput label="Pickup Location" 
           
           suggestedLocations = {this.props.suggestedStartingLocations} 
           onChange={this.handleChangeStart} 
           onSubmit={this.handleStartSearch}
-          handleUpdateAddress={this.handleUpdateAddress}/>
+          handleUpdateAddress={this.handleUpdateAddress} 
+          value={this.state.pickupLocation}/>
           <br/>
-          <SearchInput label="Destination" onChange={this.handleChangeDestination} onClick={this.dropOffSearch}/>
+          <SearchInput label="DropOff" 
+            suggestedLocations={this.props.suggestedDropOffs}
+            onChange={this.handleChangeDestination} 
+            onSubmit={this.handleDropOffSearch}
+            handleUpdateAddress={this.handleUpdateDropOffAddress}/>
           <br/>
           <Button buttonTitle="Submit" onClick={this.handleFormSubmit}/>
       </Card >
