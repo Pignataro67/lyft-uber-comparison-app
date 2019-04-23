@@ -5,22 +5,6 @@ function _fetchLocation(input) {
 }
 
 function _getLatLong(location) {
-  // return new Promise((resolve, reject) => {
-  //   geocoder.geocode(location, (error, data) => {
-  //     try {
-  //       if (error || !data.results || !data.results.length || !data.results[0].geometry) {
-  //         console.log(data);
-  //         if (data && data.status === 'OVER_QUERY_LIMIT') {
-  //           reject('OVER_QUERY_LIMIT');
-  //         }
-  //         return resolve(false);
-  //       }
-  //       return resolve(data.results[0].geometry.location);
-  //     } catch(e) {
-  //       return resolve(false);
-  //     }
-  //   });
-  // })
   return fetch(`RailsApi/confirm_route/convert_lat_long/${location}`)
   .then(res => res.json())
   .then(addressInfo => addressInfo.results[0].geometry.location)
