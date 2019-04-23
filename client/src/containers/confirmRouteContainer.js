@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import ConfirmRoute from '../components/confirmRoute/ConfirmRoute';
 import Cardlabel from '../components/Cardlabel';
-import card from '../components/Card'; 
+import Card from '../components/Card'; 
+import * as searchActions from '../actions/fetchLocations;'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 class ConfirmRouteContainer extends Component {
   render() {
@@ -9,10 +12,24 @@ class ConfirmRouteContainer extends Component {
     return (
       <Card>
         <Cardlabel cardLabel={cardLabel} />
-        <ConfirmRoute />
+        <ConfirmRoute {...this.props}/>
       </Card>
     )
   }
 }
 
-export default ConfirmRouteContainer;
+const mapStateToProps = (state) => ({
+  ...state
+})
+
+const mapDispatchToProps = (dispatch) => {
+  return {...bindActionCreators(searchActions, dispatch)}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, (stateProps, dispatchProps, ownProps) => {
+  return {
+    ...stateProps,
+    router: ownProps,
+    actions: dispatchProps,
+  };
+})(ConfirmRouteContainer);

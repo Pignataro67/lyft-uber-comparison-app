@@ -6,9 +6,15 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ConfirmRouteContainer from './containers/ConfirmRouteContainer';
 import ResultsContainer from './containers/ResultsContainer';
 import SearchContainer from './containers/SearchContainer';
+import { getMapboxKey } from './actions/fetchLocations'
 import './App.css';
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.getMapboxKey()
+  }
+
   render() {
     return (
       <div className="App">
@@ -28,4 +34,8 @@ const mapStateToProps = (state) => {
   return {startingLocation: state.startingLocation, destination: state.destination}
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dipatch) => {
+  return {getMapboxKey: () => dispatch(getMapboxKey())}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
